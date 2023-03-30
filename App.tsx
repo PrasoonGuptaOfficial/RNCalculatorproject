@@ -1,117 +1,132 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
   Text,
-  useColorScheme,
+  StyleSheet,
   View,
+  Pressable,
+  Dimensions,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+const itemData = [
+  {
+    id: 1,
+    operandValue: 'AC',
+  },
+  {
+    id: 2,
+    operandValue: '+-',
+  },
+  {
+    id: 3,
+    operandValue: '%',
+  },
+  {
+    id: 4,
+    operandValue: '/',
+  },
+  {
+    id: 5,
+    operandValue: '7',
+  },
+  {
+    id: 6,
+    operandValue: '8',
+  },
+  {
+    id: 7,
+    operandValue: '9',
+  },
+  {
+    id: 8,
+    operandValue: 'x',
+  },
+  {
+    id: 9,
+    operandValue: '1',
+  },
+  {
+    id: 10,
+    operandValue: '2',
+  },
+  {
+    id: 11,
+    operandValue: '3',
+  },
+  {
+    id: 12,
+    operandValue: '+',
+  },
+  {
+    id: 13,
+    operandValue: '0',
+  },
+  {
+    id: 14,
+    operandValue: '',
+  },
+  {
+    id: 15,
+    operandValue: '.',
+  },
+  {
+    id: 16,
+    operandValue: '=',
+  },
+];
 
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+  // eslint-disable-next-line react/no-unstable-nested-components
+  function Item(item: any, key: number) {
+    return (
+      <Pressable key={key} style={styles.buttonContainer}>
+        <Text style={styles.textContainer}>{item.item}</Text>
+      </Pressable>
+    );
+  }
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+    <SafeAreaView style={styles.mainContainer}>
+      <View style={styles.textBoxContainer}>
+        <Text>CDE</Text>
+      </View>
+      <View style={styles.operatorsContainer}>
+        {itemData.map(item => {
+          return <Item item={item.operandValue} key={item.id} />;
+        })}
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  mainContainer: {
+    flex: 1,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  textBoxContainer: {
+    flex: 1,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  operatorsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    width: Dimensions.get('window').width,
+    flexWrap: 'wrap',
   },
-  highlight: {
+  buttonContainer: {
+    flex: 1,
+    minWidth: Dimensions.get('window').width / 4,
+    maxWidth: Dimensions.get('window').width / 4,
+    height: Dimensions.get('window').height / 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 8,
+    borderWidth: 0.5,
+    borderColor: '#D3D3D3',
+  },
+  textContainer: {
+    fontSize: 16,
+    fontStyle: 'normal',
     fontWeight: '700',
+    color: '#454545',
   },
 });
 
